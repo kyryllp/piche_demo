@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: task-manager
+  datasource:
+    url: jdbc:postgresql://0.0.0.0:5432/accountmanager
+    driver-class-name: org.postgresql.Driver
+    username: myuser
+    password: verysecretpass
+
+# todo: get from .env
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs

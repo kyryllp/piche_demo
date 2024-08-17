@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: task-manager
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    driver-class-name: org.postgresql.Driver
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs

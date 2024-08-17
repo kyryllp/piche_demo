@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres_db
+    environment:
+      - 'POSTGRES_DB=accountmanager'
+      - 'POSTGRES_PASSWORD=${POSTGRES_PASSWORD}'
+      - 'POSTGRES_USER=${POSTGRES_USER}'
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./init_postgres.sql:/docker-entrypoint-initdb.d/init_postgres.sql
+    networks:
+      - app-network
+
+  app:
+    build: .
+    container_name: task_manager_app
+    environment:
+      - 'SPRING_PROFILES_ACTIVE=dev'
+      - 'SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/accountmanager'
+      - 'SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}'
+      - 'SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
