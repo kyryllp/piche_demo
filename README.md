@@ -1,5 +1,6 @@
 ## To start the application with all dependencies.
 ```bash
+cp .env.example .env # or create your own
 docker compose up
 ```
 
